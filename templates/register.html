@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+<style>
+	input {
+		width: 250px;
+		padding: 5px 5px 5px 10px;
+		outline: none;
+		border: 1px solid rgb(218, 218, 218);
+		font-size: 13px;
+		border-radius: 4px;
+	}
+	form {
+		margin: 0;
+		padding: 0;
+	}
+</style>
+<!-- ============================ COMPONENT REGISTER   ================================= -->
+	<div class="card mx-auto" style="max-width:520px; margin-top:40px;">
+		<article class="card-body" style="margin-left: 425px;width: 100%;">
+			<header class="mb-4" style="margin-left: 200px;"><h2 class="card-title">Sign up</h2></header><br>
+			{% include 'parts/alerts.html' %}
+			<br><br><br>
+			<form method="POST">
+				{% csrf_token %}
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label>First name</label>
+						{{form.first_name}}
+					</div> <!-- form-group end.// -->
+					<div class="form-group col-md-6">
+						<label>Last name</label>
+						{{form.last_name}}
+					</div> <!-- form-group end.// -->
+				</div> <!-- form-row end.// -->
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label>Email Address</label>
+						{{form.email}}
+					</div> <!-- form-group end.// -->
+					<div class="form-group col-md-6">
+						<label>Phone Number</label>
+						{{form.phone_number}}
+					</div> <!-- form-group end.// -->
+				</div> <!-- form-row.// -->
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label>Create password</label>
+						{{form.password}}
+					</div> <!-- form-group end.// -->
+					<div class="form-group col-md-6">
+						<label>Repeat password</label>
+						{{form.confirm_password}}
+					</div> <!-- form-group end.// --> 
+				</div>
+				<div class="form-group">
+					<button style="margin-left: 15px;width:513px;transition: 0.5s;" type="submit" class="btn btn-danger btn-block"> Register  </button>
+				</div> <!-- form-group// -->
+				<div style="color: red;padding-left: 20px;margin-top: 70px;margin-bottom: 70px;">
+					<div style="display: flex;">{{form.non_field_errors}}</div><br>
+					<div style="display: flex;">{{form.email.errors}}</div>
+				</div>
+			</form>
+			<p class="text-center mt-4" style="margin-left: 20px;">Have an account? <a href="{% url 'login' %}">Log In</a></p>
+		</article><!-- card-body.// -->
+    </div> <!-- card .// -->
+    <br><br>
+<!-- ============================ COMPONENT REGISTER  END.// ================================= -->
+
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+{% endblock content %}

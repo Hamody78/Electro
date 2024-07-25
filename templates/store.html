@@ -1,0 +1,331 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+
+	.range-input {
+		position: relative;
+	}
+
+	.range-input input {
+		position: absolute;
+		top: -0.5px;
+		height: 5px;
+		width: 100%;
+		background: none;
+		pointer-events: none;
+		-webkit-appearance: none;
+	}
+
+	input[type="range"]::-webkit-slider-thumb {
+		height: 10px;
+		width: 10px;
+		border-radius: 50%;
+		pointer-events: auto;
+		-webkit-appearance: none;
+		background: red;
+	}
+
+	input[type="range"]::-moz-range-thumb {
+		height: 10px;
+		width: 10px;
+		border: none;
+		border-radius: 50%;
+		pointer-events: auto;
+		-moz-appearance: none;
+		background: red;
+	}
+</style>
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<div class="col-md-12">
+				<!-- <ul class="breadcrumb-tree">
+					
+						<li><a href="#">Home</a></li>
+						<li><a href="#">All Categories</a></li>
+					{% for x in cat %}
+						<li><a href="#">Accessories</a></li>
+					{% endfor %}
+					{% for x in cat %}
+						<li class="active">Headphones (227,490 Results)</li>
+					{% endfor %}
+				</ul> -->
+			</div>
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+
+<!-- SECTION -->
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<!-- ASIDE -->
+			<div id="aside" class="col-md-3">
+
+				<!-- aside Widget -->
+				<div class="aside">
+					<div class="wrapper">
+						<header>
+							<h3 class="aside-title">Price Range</h3>
+							<p>Use Slider or enter min and max price</p>
+						</header>
+						<form method="GET">
+							<div class="price-input" style="display: flex;">
+								<span>Price: </span>
+								<div class="field" style="display: flex;margin-left: 20px">
+									<!-- <span style="margin-top: 2.5px;">Min</span> -->
+									$<input readonly style="outline: none;border: 0;padding: 0;" type="number" name="min_number" class="input-min" min="0" max="{{last_product}}" value="0">
+								</div>
+								<div>-</div>
+								<div class="field" style="display: flex;margin-left: 7.5px;">
+									<!-- <span style="margin-top: 2.5px;">Max</span> -->
+									$<input readonly style="outline: none;border: 0;padding: 0;" type="number" name="max_number" class="input-max" min="0" max="{{last_product}}" value="{{last_product}}">
+								</div>
+							</div><br>
+							<div class="slider" style="height: 5px;border-radius: 5px;background: #ddd;position: relative;">
+								<div class="progress" style="height: 5px;border-radius: 5px;background: #ff0000;position: absolute;"></div>
+									<div class="range-input">
+									<input type="range" style="cursor: e-resize;" class="range-min" min="0" max="{{last_product}}" value="0" step="0">
+									<input type="range" style="cursor: e-resize;" class="range-max" min="0" max="{{last_product}}" value="{{last_product}}" step="0">
+								</div>
+							</div>
+					</div>
+							<br><br>
+							<input type="submit" value="Filter" class="btn btn-danger">
+						</form>
+
+					<script>
+						const rangeInput = document.querySelectorAll(".range-input input"),
+						progress = document.querySelector(".slider .progress"),
+						priceInput = document.querySelectorAll(".price-input input");
+						let priceGap = 0;
+
+						priceInput.forEach(input =>{
+							input.addEventListener("input", e=>{
+								let minVal = parseInt(priceInput[0].value),
+								maxVal = parseInt(priceInput[1].value);
+							})
+						})
+
+						rangeInput.forEach(input => {
+							input.addEventListener("input", e=>{
+								let minVal = parseInt(rangeInput[0].value),
+								maxVal = parseInt(rangeInput[1].value);
+
+								if ((maxVal - minVal < priceGap)) {
+									if(e.target.className === "range-min"){
+										rangeInput[0].value = maxVal - priceGap
+									}else{
+										rangeInput[1].value = minVal + priceGap
+									}
+								}else {
+									priceInput[0].value = minVal;
+									priceInput[1].value = maxVal;
+									progress.style.left = (minVal / rangeInput[0].max) * 100 + "%";
+									progress.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
+								}
+							});
+						});
+					</script>
+				</div>
+				<!-- /aside Widget -->
+
+				<!-- aside Widget -->
+				<div class="aside">
+					<h3 class="aside-title">Brand</h3>
+					<div class="checkbox-filter">
+						{% for z in brand %}
+							<div class="input-checkbox">
+							<input type="checkbox" id="brand-{{z.product_name}}">
+							<label for="brand-{{z.product_name}}">
+								<span></span>
+								{{z.product_name}}
+								<small>({{z.stock}})</small>
+							</label>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+				<!-- /aside Widget -->
+
+				<!-- aside Widget -->
+				<div class="aside">
+					<h3 class="aside-title">Top selling</h3>
+					{% for i in topSellingProduct %}
+					<div class="product-widget">
+						
+						<div class="product-img">
+							<img src= {{i.image.url}} alt="">
+						</div>
+						<div class="product-body">
+							<p class="product-category"> {{i.Category.category_name}} </p>
+							<h3 class="product-name"><a href="#"> {{i.product_name}} </a></h3>
+							<h4 class="product-price">${{i.price_after_discount}} <del class="product-old-price">${{i.price}}</del></h4>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+				<!-- /aside Widget -->
+			</div>
+			<!-- /ASIDE -->
+			<!-- STORE -->
+			<div id="store" class="col-md-9">
+				<!-- store top filter -->
+				<div class="store-filter clearfix">
+					<div class="store-sort">
+						<label>
+							Sort By:
+							<select class="input-select">
+								<option value="0">Popular</option>
+								<option value="1">Position</option>
+							</select>
+						</label>
+
+						<label>
+							Show:
+							<select class="input-select">
+								<option value="0">20</option>
+								<option value="1">50</option>
+							</select>
+						</label>
+					</div>
+					<ul class="store-grid">
+						<li class="active"><i class="fa fa-th"></i></li>
+						<li><a href="#"><i class="fa fa-th-list"></i></a></li>
+					</ul>
+				</div>
+				<!-- /store top filter -->
+				<!-- store products -->
+				<div class="row">
+					<div class="clearfix visible-sm visible-xs"></div>
+					{% if count_price_list == 0 and min_number == None and max_number == None %}
+						{% for x in pro %}
+							<!-- product -->
+							<div class="col-md-4 col-xs-6">
+								<form action="{% url 'add_cart' x.id %}" method="POST">
+									{% csrf_token %}
+									<div class="product">
+										<a href="{{ x.get_url }}" class="product-img"> <img src="{{ x.image.url }}" alt=""> </a>
+										<div class="product-body">
+											<p class="product-category"><a href="{{    x.category.get_url  }}">{{x.category.category_name}}</a></p>
+											<h3 class="product-name"><a href="{% url 'product_by_details'     x.category.slug         x.slug %}">{{x.product_name}}</a></h3>
+											<h4 class="product-price">${{x.price_after_discount}} <del class="product-old-price">${{x.price}}</del></h4>
+											<div class="product-rating">
+												
+											</div>
+											<div class="product-btns">
+												<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+												<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+												<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+											</div>
+										</div>
+										<input type="number" name="quantity" value="1" hidden>
+										<div hidden>
+											<select required name="model">
+												{% for i in x.variation_set.modelss %}
+													<option value="{{i.variation_value}}">{{i.variation_value}}</option>
+												{% endfor %}
+											</select>
+											<select required name="color">
+												{% for i in x.variation_set.colors %}
+													<option value="{{i.variation_value}}">{{i.variation_value}}</option>
+												{% endfor %}
+											</select>
+										</div>
+										<div class="add-to-cart">
+											{% if x.stock > 0 %}
+											<button type="submit" class="btn btn-danger"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											{% else %}
+												<h4>out of stock</h4>
+											{% endif %}										
+										</div>
+									</div>
+								</form>
+							</div>
+							<!-- /product -->
+						{% endfor %}
+					{% else %}
+						{% for x in price_list %}
+							<!-- product -->
+							<div class="col-md-4 col-xs-6">
+								<form action="{% url 'add_cart' x.id %}" method="POST">
+									{% csrf_token %}
+									<div class="product">
+										<a href="{{ x.get_url }}" class="product-img"> <img src="{{ x.image.url }}" alt=""> </a>
+										<div class="product-body">
+											<p class="product-category"><a href="{{    x.category.get_url  }}">{{x.category.category_name}}</a></p>
+											<h3 class="product-name"><a href="{% url 'product_by_details'     x.category.slug         x.slug %}">{{x.product_name}}</a></h3>
+											<h4 class="product-price">${{x.price_after_discount}} <del class="product-old-price">${{x.price}}</del></h4>
+											<div class="product-rating">
+												
+											</div>
+											<div class="product-btns">
+												<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+												<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+												<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+											</div>
+										</div>
+										<input type="number" name="quantity" value="1" hidden>
+										<div hidden>
+											<select required name="model">
+												{% for i in x.variation_set.modelss %}
+													<option value="{{i.variation_value}}">{{i.variation_value}}</option>
+												{% endfor %}
+											</select>
+											<select required name="color">
+												{% for i in x.variation_set.colors %}
+													<option value="{{i.variation_value}}">{{i.variation_value}}</option>
+												{% endfor %}
+											</select>
+										</div>
+										<div class="add-to-cart">
+											{% if x.stock > 0 %}
+											<button type="submit" class="btn btn-danger"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											{% else %}
+												<h4>out of stock</h4>
+											{% endif %}										
+										</div>
+									</div>
+								</form>
+							</div>
+							<!-- /product -->
+						{% endfor %}
+					{% endif %}
+				</div>
+				<!-- /store products -->
+				<div class="clearfix visible-sm visible-xs"></div>
+				<!-- store bottom filter -->
+				<div class="store-filter clearfix">
+					<span class="store-qty">Showing 20-100 products</span>
+					<ul class="store-pagination">
+						<li class="active">1</li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+					</ul>
+				</div>
+				<!-- /store bottom filter -->
+			</div>
+			<!-- /STORE -->
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /SECTION -->
+
+
+{% endblock  %}

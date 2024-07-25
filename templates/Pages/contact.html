@@ -1,0 +1,24 @@
+{% extends 'base1.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="section" style="text-align: center;">
+    <div class="content">
+        <h2 style="font-weight: 150;">CONTACT US</h2><br><br>
+        <p style="width: 470px;margin-left: 430px;">Have any questions or need to get more information about the product?
+            Either way, you’re in the right spot.
+        </p><br>
+        <a href="mailto:support@alidropship.com">support@alidropship.com</a><br><br>
+    </div>
+    <form>
+        <input type="text" name="name" placeholder="Name*" style="width: 620px;padding: 10px 20px 10px 20px;border: 1px solid rgb(209, 209, 209);border-radius: 2px;outline: none;"><br><br>
+        <input type="email" name="email" placeholder="Email*" style="width: 620px;padding: 10px 20px 10px 20px;border: 1px solid rgb(209, 209, 209);border-radius: 2px;outline: none;"><br><br>
+        <textarea style="resize: none;padding: 10px 20px 10px 20px;border: 1px solid rgb(209, 209, 209);border-radius: 2px;outline: none;" name="message" cols="75" rows="10" placeholder="Message*"></textarea><br><br>
+        <!-- <input type="text" name="message" placeholder="Message*" style="width: 620px;padding: 0px 20px 0px 20px;border: 1px solid rgb(209, 209, 209);height: 300px;text-align: left;"> -->
+        <input type="submit" value="Send Message" class="btn btn-primary">
+    </form>
+</div>
+
+{% endblock content %}

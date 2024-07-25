@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<center style="margin-top: 80px;">
+    <!--Tracking number input box.-->
+    <input type="text" id="YQNum" maxlength="50" style="width: 500px;outline: none;border: 1px solid rgb(214, 214, 214);padding: 10px 10px 10px 20px;border-radius: 10px;margin-top: 5px;border-top-right-radius: 0;border-bottom-right-radius: 0;" placeholder="Track Your Order"/>
+    <!--The button is used to call script method.-->
+    <input type="button" value="TRACK" onclick="doTrack()" style="padding: 10.5px;outline: none;border: 0;border-radius: 10px;background-color: rgb(209, 0, 36);color: white;width: 100px;border-top-left-radius: 0;border-bottom-left-radius: 0;"/>
+    <br><br>
+    <!--Container to display the tracking result.-->
+    <div id="YQContainer"></div>
+    <!-- <a href="{% url 'track' %}">Clear</a> -->
+    <!--Script code can be put in the bottom of the page, wait until the page is loaded then execute.-->
+    <script type="text/javascript" src="//www.17track.net/externalcall.js"></script>
+    <script type="text/javascript">
+    function doTrack() {
+        var num = document.getElementById("YQNum").value;
+        if(num === ""){
+            alert("Enter your number."); 
+            return;
+        }
+        YQV5.trackSingle({
+            //Required, Specify the container ID of the carrier content.
+            YQ_ContainerId:"YQContainer",
+            //Optional, specify tracking result height, max height 800px, default is 560px.
+            YQ_Height:560,
+            //Optional, select carrier, default to auto identify.
+            YQ_Fc:"0",
+            //Optional, specify UI language, default language is automatically detected based on the browser settings.
+            YQ_Lang:"en",
+            //Required, specify the number needed to be tracked.
+            YQ_Num:num
+        });
+    }
+    </script>
+</center>
+<br><br><br>
+{% endblock content %}
