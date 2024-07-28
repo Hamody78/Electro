@@ -96,7 +96,7 @@
 					<img src="{% static './img/pay-mastercard.png'%}" height="26">
 					<img src="{% static './img/pay-american-ex.png'%}" height="26">
 				</p>
-				<a href="./place-order.html" class="btn btn-danger btn-block" style="transition: 0.6s;">Proceed to Checkout </a>
+				<a href="{% url 'checkout' %}" class="btn btn-danger btn-block" style="transition: 0.6s;">Proceed to Checkout </a>
 				<br>
 
 				<style>

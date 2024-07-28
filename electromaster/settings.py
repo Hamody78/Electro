@@ -23,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-m&yg@-x6iaai^d+490k9ic)wn72)n@as8vu_ixm8dh(f746*qe'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # ALLOWED_HOSTS = ["127.0.0.1:8000", "127.0.0.1", "localhost", "localhost:8000"]
-ALLOWED_HOSTS = ['hamody78.github.io/Electro', 'https://hamody78.github.io/Electro/']
+ALLOWED_HOSTS = []
 
 # Application definition
 

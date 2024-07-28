@@ -132,3 +132,18 @@ def cart(request, total=0, quantity=0, cart_items=None):
         "empty":empty
     }
     return render(request, 'cart.html', context)
+
+
+def checkout(request, quantity=0, total=0, cart_items=None):
+    cart_items = Cartitem.objects.filter(cart__cart_id=_cart_id(request), is_active=True)
+    cart_items_count = cart_items.count()
+    for cart_item in cart_items:
+        total += (cart_item.product.price_after_discount * cart_item.quantity)
+        quantity += cart_item.quantity
+
+    context = {
+        "cart_items":cart_items,
+        "cart_items_count":quantity,
+        "total":total,
+    }
+    return render(request, "checkout.html", context)

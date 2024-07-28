@@ -1,0 +1,296 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- SECTION -->
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+
+			<div class="form-group">
+				<div class="input-checkbox">
+					<input type="checkbox" id="login-account">
+					<label for="login-account">
+						<span></span>
+						Have an account?
+					</label>
+					<div class="caption">
+						<div class="card mx-auto" style="max-width: 380px;">					
+						{% include 'parts/alerts.html' %}
+						  <div class="card-body" style="width: 100%;">
+						  <form action="{% url 'login' %}" method="POST">
+								{% csrf_token %}
+								<div class="form-group">
+									<input type="email" class="form-control" placeholder="Email Address" name="email">
+								</div> <!-- form-group// -->
+								<div class="form-group">
+									<input type="password" class="form-control" placeholder="Password" name="password">
+								</div> <!-- form-group// --> 
+								<div class="form-row" style="display: flex;justify-content: space-between;">
+									<div class="form-group">
+										<input type="checkbox" id="check1">
+										<label for="check1">Rememder me</label>
+									</div> <!-- form-group form-check .// -->
+									<div class="form-group">
+										<a href="#" class="float-right">Forgot password?</a>
+									</div> <!-- form-group form-check .// -->
+						
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-danger btn-block"> Login  </button>
+								</div> <!-- form-group// -->    
+						  </form>
+						  </div> <!-- card-body.// -->
+						</div>					
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="input-checkbox">
+					<input type="checkbox" id="enter-coupon">
+					<label for="enter-coupon">
+						<span></span>
+						Have a coupon?
+					</label>
+					<div class="caption">
+						<div class="card mx-auto" style="max-width: 380px;">					
+						{% include 'parts/alerts.html' %}
+						  <div class="card-body" style="width: 100%;">
+						  <form action="{% url 'login' %}" method="POST">
+								{% csrf_token %}
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="Enter your coupon" name="coupon" id="coupon">
+								</div> <!-- form-group// -->
+								<div class="form-group">
+									<button type="submit" class="btn btn-danger btn-block">Apply Coupon</button>
+								</div> <!-- form-group// -->    
+						  </form>
+						  </div> <!-- card-body.// -->
+						</div>					
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-7">
+				<!-- Billing Details -->
+				<div class="billing-details">
+					<div class="section-title">
+						<h3 class="title">Billing address</h3>
+					</div>
+					<div class="form-group">
+						<input class="input" type="text" name="first-name" placeholder="First Name">
+					</div>
+					<div class="form-group">
+						<input class="input" type="text" name="last-name" placeholder="Last Name">
+					</div>
+					<div class="form-group">
+						<input class="input" type="email" name="email" placeholder="Email">
+					</div>
+					<div class="form-group">
+						<input class="input" type="text" name="address" placeholder="Address">
+					</div>
+					<div class="form-group">
+						<input class="input" type="text" name="city" placeholder="City">
+					</div>
+					<div class="form-group">
+						<input class="input" type="text" name="country" placeholder="Country">
+					</div>
+					<div class="form-group">
+						<input class="input" type="text" name="zip-code" placeholder="ZIP Code">
+					</div>
+					<div class="form-group">
+						<input class="input" type="tel" name="tel" placeholder="Phone Number">
+					</div>
+					<div class="form-group">
+						<div class="input-checkbox">
+							<input type="checkbox" id="create-account">
+							<label for="create-account">
+								<span></span>
+								Create Account?
+							</label>
+							<div class="caption">
+								<!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p> -->
+								<input class="input" type="password" name="password" placeholder="Enter Your Password">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /Billing Details -->
+
+				<!-- Shiping Details -->
+				<div class="shiping-details">
+					<div class="section-title">
+						<h3 class="title">Shiping address</h3>
+					</div>
+					<div class="input-checkbox">
+						<input type="checkbox" id="shiping-address">
+						<label for="shiping-address">
+							<span></span>
+							Ship to a diffrent address?
+						</label>
+						<div class="caption">
+							<div class="form-group">
+								<input class="input" type="text" name="first-name" placeholder="First Name">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="last-name" placeholder="Last Name">
+							</div>
+							<div class="form-group">
+								<input class="input" type="email" name="email" placeholder="Email">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="address" placeholder="Address">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="city" placeholder="City">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="country" placeholder="Country">
+							</div>
+							<div class="form-group">
+								<input class="input" type="text" name="zip-code" placeholder="ZIP Code">
+							</div>
+							<div class="form-group">
+								<input class="input" type="tel" name="tel" placeholder="Phone Number">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /Shiping Details -->
+
+				<!-- Order notes -->
+				<div class="order-notes">
+					<textarea class="input" placeholder="Order Notes" style="resize: none;"></textarea>
+				</div>
+				<!-- /Order notes -->
+			</div>
+
+			<!-- Order Details -->
+			<div class="col-md-5 order-details">
+				<div class="section-title text-center">
+					<h3 class="title">Your Order</h3>
+				</div>
+				<div class="order-summary">
+					<div class="order-col">
+						<div><strong>PRODUCT</strong></div>
+						<div><strong>TOTAL</strong></div>
+					</div>
+					<div class="order-products">
+						{% for cart_item in cart_items %}
+						<div class="order-col">
+							<div>{{cart_item.quantity}}x {{cart_item.product.product_name}}</div>
+							<div>${{cart_item.subtotal}}</div>
+						</div>
+						{% endfor %}
+					</div>
+					<div class="order-col">
+						<div>Shipping</div>
+						<div><strong>FREE</strong></div>
+					</div>
+					<div class="order-col">
+						<div><strong>TOTAL</strong></div>
+						<div><strong class="order-total">${{total}}</strong></div>
+					</div>
+				</div>
+				<div class="payment-method">
+					<div class="input-radio">
+						<input type="radio" name="payment" id="payment-1">
+						<label for="payment-1">
+							<span></span>
+							Direct Bank Transfer
+						</label>
+						<div class="caption">
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+						</div>
+					</div>
+					<br><br>
+					<div class="input-radio">
+						<input type="radio" name="payment" id="payment-2">
+						<label for="payment-2">
+							<span> </span>
+							<img src="{% static './img/misc/payment-card.png' %}" class="float-right" height="24">  
+							<label class="form-check" data-toggle="collapse" data-target="#pay_payme">
+								<input class="form-check-input" name="payment-option" type="radio" value="option2">
+								<h6 class="form-check-label"> Credit Card  </h6>
+							</label>
+						</label>
+						<div class="caption">
+							<p class="alert alert-success">Some information or instruction</p>
+							<form class="form-inline">
+								<input type="text" class="form-control mr-2" placeholder="xxxx-xxxx-xxxx-xxxx" maxlength="16" name="">
+								<input type="text" class="form-control mr-2" style="width: 100px" maxlength="5" placeholder="MM/YY" name="">
+								<input type="text" maxlength="4" class="form-control mr-2"  style="width: 100px" placeholder="cvc" name="">
+								<br><br>
+								<button class="btn btn btn-success">submit</button>
+							</form>						
+						</div>
+					</div>
+					<br><br>
+					<div class="input-radio">
+						<input type="radio" name="payment" id="payment-3">
+						<label for="payment-3">
+							<span></span>
+							<img src="{% static './img/misc/payment-paypal.png' %}" class="float-right" height="24"> 
+							<label class="form-check collapsed" data-toggle="collapse" data-target="#pay_paynet">
+								<input class="form-check-input" name="payment-option" checked type="radio" value="option2">
+								<h6 class="form-check-label"> 
+									Paypal 
+								</h6>
+							</label>
+						</label>
+						<div class="caption">
+							<div id="pay_paynet" class="collapse show" data-parent="#accordion_pay">
+							<div class="card-body">
+								<p class="text-center text-muted">Connect your PayPal account and use it to pay your bills. You'll be redirected to PayPal to add your billing information.</p>
+								<p class="text-center">
+									<a href="#"><img src="{% static './img/misc/btn-paypal.png' %}" height="32"></a>
+									<br><br>
+								</p>
+							</div>
+						</div>
+						</div>
+					</div>
+				</div>
+				<br><br>
+				<div class="input-checkbox">
+					<input type="checkbox" id="terms">
+					<label for="terms">
+						<span></span>
+						I've read and accept the <a href="#">terms & conditions</a>
+					</label>
+				</div>
+
+				<p class="text-center mb-3">
+					<img src="{% static './img/misc/payments.png' %}" height="26">
+				</p>
+
+				<a href="#" class="primary-btn order-submit">Place order</a>
+				<style>
+					.bt {
+						border: 1px solid rgb(40, 96, 144);
+						padding: 9px 45px 9px 45px;
+						border-radius: 25px;
+						color: rgb(40, 96, 144);
+						transition: 0.6s;
+						text-align: center;
+						text-transform: uppercase;
+					}
+					.bt:hover {
+						background-color: rgb(84, 84, 255);
+						color: white;
+					}
+				</style>
+				<a href="{% url 'store'%}" class="bt order-submit">Continue Shopping</a>
+			</div>
+			<!-- /Order Details -->
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /SECTION -->
+
+{% endblock content %}
